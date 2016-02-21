@@ -99,10 +99,10 @@ class Deck:
         return len(self.deck)
     def reshuffle(self):
         random.shuffle(self.deck)
-    def drawCards(self,num):
+    def getNextCards(self,num):
         cardsToReturn = []
         for i in range(num):
             cardsToReturn.append( self.deck.pop(0) )
         return cardsToReturn
-    def drawCard(self):
-        return self.drawCards(1)[0]
+    def getNextCard(self):
+        return self.getNextCards(1)[0]

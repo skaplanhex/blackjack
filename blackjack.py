@@ -3,14 +3,16 @@ from player import *
 from helperFunctions import *
 import sys
 
+def drawCard(deck,player):
+    player.addToHand( deck.getNextCard() )
+
 def deal(deck,player,dealer):
     player.nextHand()
     dealer.nextHand()
-    player.addToHand( deck.drawCard() )
-    dealer.addToHand( deck.drawCard() )
-    player.addToHand( deck.drawCard() )
-    dealer.addToHand( deck.drawCard() )
-
+    drawCard(deck,player)
+    drawCard(deck,dealer)
+    drawCard(deck,player)
+    drawCard(deck,dealer)
 def quitGame():
     print "OK, thanks for playing!"
     sys.exit(0)
@@ -18,7 +20,6 @@ def quitGame():
 def checkIfQuit(s):
     if s == 'quit':
         quitGame()
-
 def playHand(deck,player,dealer):
     deal(deck,player,dealer)
     # calculate player total
@@ -29,7 +30,8 @@ def playHand(deck,player,dealer):
         softHand = True
     print " "
     print "The cards have been dealt!"
-    print "Your cards are the %s and the %s."%player.getHandStrs()
+    print "Your cards are the %s and the %s."%player.getHandStrTuple()
+    print player.getTotalString()
     print "The dealer has the %s showing."%dealer.firstCardStr()
     print " "
     nextAction = raw_input("Would you like to hit or stay? ").lower()
@@ -37,6 +39,12 @@ def playHand(deck,player,dealer):
     while nextAction not in ['hit','stay']:
         nextAction = raw_input("Please choose either hit, stay, or quit: ").lower()
         checkIfQuit(nextAction)
+    if nextAction == 'hit':
+        drawCard(deck,player)
+        print player.getHandStr()
+        print player.getTotalString()
+
+
 
 def main():
     # deck = Deck(1)
