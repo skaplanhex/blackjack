@@ -1,9 +1,30 @@
 import random
 
+valueDict =  {
+    '2' : 2,
+    '3' : 3,
+    '4' : 4,
+    '5' : 5,
+    '6' : 6,
+    '7' : 7,
+    '8' : 8,
+    '9' : 9,
+    '10' : 10,
+    "jack" : 10,
+    "queen" : 10,
+    "king" : 10,
+    "ace" : -1000,
+}
+
 class Card:
     def __init__(self,tempRank,tempSuit):
         self.rank = tempRank
         self.suit = tempSuit
+    # will return -1000 if an ace to signal that we need to consider the soft case
+    def getValue(self):
+        return valueDict[self.rank]
+    def getStr(self):
+        return "%s of %s"%(self.rank,self.suit)
 
 # dictionary that gives each type of card a number identifier to be used with the random number generator
 deckDict = {
